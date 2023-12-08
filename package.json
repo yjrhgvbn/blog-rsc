@@ -6,7 +6,9 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "clean": "turbo clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:push": "turbo db:push",
+    "db:generate": "turbo db:generate"
   },
   "devDependencies": {
     "eslint": "^8.55.0",

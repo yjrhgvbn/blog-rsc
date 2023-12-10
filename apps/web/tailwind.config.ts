@@ -5,7 +5,7 @@ import sharedConfig from "@repo/tailwind-config";
 import plugin from "tailwindcss";
 
 const config: Pick<Config, "content" | "presets" | "plugins" | "theme"> = {
-  content: ["./src/app/**/*.tsx"],
+  content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./pages/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./src/**/*.{js,ts,jsx,tsx,mdx}"],
   presets: [sharedConfig],
   plugins: [require("flowbite-typography")],
   theme: {

@@ -12,6 +12,7 @@
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.10.0",
     "@codesandbox/sandpack-themes": "^2.0.21",
+    "@repo/api": "workspace:*",
     "@repo/ui": "workspace:*",
     "@types/hast": "^3.0.3",
     "@types/lodash-es": "^4.17.12",

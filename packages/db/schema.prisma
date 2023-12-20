@@ -71,7 +71,7 @@ model Post {
   title          String     @unique
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
-  published      Boolean    @default(false)
+  published      Boolean    @default(true)
   overview       String?
   content        String?    @db.MediumText
   authorId       String?

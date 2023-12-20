@@ -1,8 +1,5 @@
-import { getPostTotallPage } from "@repo/api";
-import { PostList } from "./home/post-list";
+import { PostList } from "./posts/post-list";
 
-export default async function Page() {
-  const data = await getPostTotallPage();
-
-  return <PostList total={3} />;
+export default function Page() {
+  return <PostList page={1} />;
 }

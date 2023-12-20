@@ -87,10 +87,9 @@ async function getDiffFiles() {
 
 async function saveDiffFiles() {
   const { remove, add, update } = await getDiffFiles();
-  console.log("🚀 ~ file: save.ts:89 ~ saveDiffFiles ~ { remove, add, update }:", { remove, add, update });
   await prisma.post.deleteMany({ where: { path: { in: remove.map((i) => i.path) } } });
   for (let i = 0; i < add.length; i++) {
-    const { path, hash } = add[i];
+    const { path, hash } = add[i]!;
     const pathArr = path.split("/").reverse();
     const [title, ...tags] = pathArr;
     const content = fs.readFileSync(toAbsolutePath(path), "utf-8");
@@ -99,7 +98,7 @@ async function saveDiffFiles() {
         path,
         content,
         hash,
-        title,
+        title: title.split(".").slice(0, -1).join("."), // remove .md
         tags: {
           connectOrCreate: tags.map((tag) => {
             return {

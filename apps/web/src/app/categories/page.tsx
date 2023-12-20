@@ -5,13 +5,13 @@ export default async function Page() {
   const aLlPostResPonse = await getALlPost();
   if (!aLlPostResPonse.sucess) return <div>error</div>;
   const list = aLlPostResPonse.data;
-  const listGroup = list.reduce((acc, cur) => {
+  const listGroup: { [key: string]: { id: string; title: string; time: Date; tags: string[] }[] } = {};
+  list.forEach((cur) => {
     const year = cur.time.getFullYear();
-    if (!acc[year]) {
-      acc[year] = [];
+    if (!listGroup[year]) {
+      listGroup[year] = [];
     }
-    acc[year].push(cur);
-    return acc;
+    listGroup[year]!.push(cur);
   }, {});
   const listGroupArr = Object.keys(listGroup)
     .map((key) => {
@@ -22,7 +22,7 @@ export default async function Page() {
     })
     .sort((a, b) => {
       return Number(b.year) - Number(a.year);
-    }) as { year: string; list: { id: string; title: string; time: Date; tag: string[] }[] }[];
+    }) as { year: string; list: { id: string; title: string; time: Date; tags: string[] }[] }[];
   return (
     <div className="mx-auto max-w-3xl">
       {listGroupArr.map((item) => {
@@ -35,8 +35,8 @@ export default async function Page() {
                   <Link href={`/post/${item.id}`} className="relative mb-4 border-gray-200 dark:border-gray-700 flex items-center text-sm leading-none font-normal">
                     <div className=" text-gray-400 dark:text-gray-500 text-lg">[{item.time.toLocaleDateString()}]</div>
                     <div className="ml-2 text-2xl text-gray-700">{item.title}</div>
-                    {item.tag
-                      ? item.tag.map((tag) => {
+                    {item.tags
+                      ? item.tags.map((tag) => {
                           return <div className="ml-2 text-sm text-gray-400 dark:text-gray-500">#{tag}</div>;
                         })
                       : null}

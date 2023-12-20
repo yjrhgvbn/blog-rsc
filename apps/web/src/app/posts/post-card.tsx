@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 interface PostCardProps {
   title: string;
   href: string;
@@ -32,7 +33,7 @@ export function PostCard(props: PostCardProps) {
       {img && (
         <div className="hidden sm:block text-right rounded-md overflow-hidden ">
           <Link href={href} aria-label={title} className="">
-            <img alt={title} loading="lazy" decoding="async" data-nimg="responsive" src={img} className="object-cover h-full max-h-60" />
+            <Image alt={title} loading="lazy" decoding="async" data-nimg="responsive" src={img} className="object-cover h-full max-h-60" />
           </Link>
         </div>
       )}

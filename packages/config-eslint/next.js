@@ -13,7 +13,7 @@ module.exports = {
     node: true,
     browser: true,
   },
-  plugins: ["simple-import-sort", "only-warn"],
+  plugins: ["only-warn"],
   settings: {
     "import/resolver": {
       typescript: {
@@ -27,8 +27,4 @@ module.exports = {
     "node_modules/",
   ],
   overrides: [{ files: ["*.js?(x)", "*.ts?(x)"] }],
-  // add rules configurations here
-  rules: {
-    "import/no-default-export": "off",
-  },
 };

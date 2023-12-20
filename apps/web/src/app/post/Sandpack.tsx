@@ -53,7 +53,7 @@ const CustomTabs = (properties: CustomTabsProperties) => {
         ))}
       </div>
       <div className={clsx("mr-2 flex items-center")}>
-        <CopyButton text={files[activeFile].code} />
+        <CopyButton text={files[activeFile]?.code || ""} />
         <button onClick={handleReset}>Rest</button>
       </div>
     </div>

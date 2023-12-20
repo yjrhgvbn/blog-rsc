@@ -33,8 +33,11 @@ export const getPostList = wrapResponse(async (params?: { page: number; pageSize
     },
     skip: (page - 1) * pageSize,
     take: pageSize,
+    orderBy: {
+      createdAt: "desc",
+    },
   };
-  const [posts, count] = await prisma.$transaction([prisma.post.findMany(), prisma.post.count({ where: query.where })]);
+  const [posts, count] = await prisma.$transaction([prisma.post.findMany(query), prisma.post.count()]);
   return {
     content: posts,
     page: page,
@@ -62,28 +65,6 @@ export const getALlPost = wrapResponse(async () => {
   });
 });
 
-export const createOrUpdatePost = wrapResponse(async (params: { title: string; content?: string; tags?: string[]; overview?: string }) => {
-  const { title, content, tags = [], overview } = params;
-  const data = {
-    title,
-    content,
-    overview,
-    tags: {
-      connectOrCreate: tags.map((tag) => {
-        return {
-          where: { name: tag },
-          create: { name: tag },
-        };
-      }),
-    },
-  };
-  return prisma.post.upsert({
-    where: { title },
-    create: {
-      ...data,
-      content: content || "",
-      overview: overview || content?.slice(0, 100) || "",
-    },
-    update: data as Prisma.PostUpdateInput,
-  });
+export const getPostCount = wrapResponse(async () => {
+  return prisma.post.count();
 });

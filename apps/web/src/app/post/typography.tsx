@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { rehypeHighlight, remarkMarkCode, codeHandler } from "./plugin";
 import type React from "react";
-import { useCallback, Suspense, lazy } from "react";
+import { useCallback } from "react";
 import { CopyButton } from "./CopyButton";
 
 // const LazySandpack = lazy(async () => import("./Sandpack"));
@@ -14,8 +14,8 @@ export interface MarkdownProperties {
   source: string;
 }
 export const Typography = ({ source }: MarkdownProperties) => {
-  const ReactMarkdownComponents = useCallback((codeProperties) => {
-    const { children, className, node, ...rest } = codeProperties;
+  const ReactMarkdownComponents = useCallback((codeProperties: any) => {
+    const { children, className, node } = codeProperties;
     const match = /language-(\w+)/.exec(className || "");
     if (!match) {
       return <code className={clsx("mx-1 rounded-md bg-gray-200 px-1 py-1 ")}>{children}</code>;
@@ -27,7 +27,7 @@ export const Typography = ({ source }: MarkdownProperties) => {
     const isFirstFile = node.data?.isFirstFile as boolean;
     const isShow = isFileMarked ? isFirstFile : true;
     const template: any = node.data?.template || "vanilla";
-    if (!isFileMarked) {
+    if (isFileMarked) {
       return (
         <Sandpack files={files} isShow={isShow} template={template}>
           {children as JSX.Element}
@@ -51,7 +51,7 @@ export const Typography = ({ source }: MarkdownProperties) => {
     );
   }, []);
 
-  const preComponent = useCallback((properties) => {
+  const preComponent = useCallback((properties: any) => {
     return <div className={clsx("w-full overflow-auto my-7")}>{properties.children}</div>;
   }, []);
 

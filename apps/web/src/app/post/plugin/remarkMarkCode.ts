@@ -15,7 +15,7 @@ export function remarkMarkCode() {
     let currentMarkedCodeHead: Code | null = null;
     codes.forEach(([node, rootIndex], index) => {
       if (index > 0) {
-        const preCodeRootIndex = codes[index - 1][1];
+        const preCodeRootIndex = codes[index - 1]?.[1];
         if (preCodeRootIndex !== rootIndex - 1) {
           currentMarkedCodeHead = node;
         }

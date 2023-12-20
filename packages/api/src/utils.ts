@@ -4,7 +4,7 @@ type WrapResponse<T extends (...args: any) => any> = (...args: Parameters<T>) =>
 export function wrapResponse<T extends (...args: any) => any>(fn: T): WrapResponse<T> {
   const wrapped = async (...args: Parameters<T>) => {
     try {
-      const res = await fn(...args);
+      const res = await fn(...(args as any));
       return {
         data: res,
         sucess: true as const,

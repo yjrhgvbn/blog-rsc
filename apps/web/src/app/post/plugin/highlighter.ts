@@ -75,15 +75,15 @@ export const rehypeHighlight: Plugin = (options: Options = {}) => {
         return;
       }
 
-      if (!lang && result.data.language) {
+      if (!lang && result.data?.language) {
         const languageName: string = result.data.language;
         node.properties.className.push(`language-${languageName}`);
       }
 
-      node.data = { ...node.data, language: result.data.language, codeContent };
+      node.data = { ...node.data, language: result.data?.language, codeContent };
 
       if (Array.isArray(result.children) && result.children.length > 0) {
-        node.children = result.children;
+        node.children = result.children as any;
       }
     });
   };

@@ -20,7 +20,8 @@
   "scripts": {
     "db:generate": "dotenv -e ../../.env prisma generate",
     "db:push": "dotenv -e ../../.env prisma db push",
-    "db:reset": "dotenv -e ../../.env prisma db push -- --force-reset"
+    "db:reset": "dotenv -e ../../.env prisma db push -- --force-reset",
+    "note": "dotenv -e ../../.env tsx ./scripts/save.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.7.0",
@@ -28,6 +29,8 @@
   },
   "devDependencies": {
     "dotenv": "^16.3.1",
-    "prisma": "^5.7.0"
+    "hasha": "^6.0.0",
+    "prisma": "^5.7.0",
+    "tsx": "^4.7.0"
   }
 }

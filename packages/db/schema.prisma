@@ -64,7 +64,6 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  posts     Post[]
 }
 
 model Post {
@@ -73,16 +72,16 @@ model Post {
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
   published      Boolean    @default(false)
-  overview       String
+  overview       String?
   content        String?    @db.MediumText
-  author         User?      @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId       String?
   img            String?
   imgDescription String?
+  hash           String    @unique
+  path           String    @unique
   // wordWeight     String?
   tags           Tag[]
 
-  @@index([authorId])
 }
 
 model Tag {

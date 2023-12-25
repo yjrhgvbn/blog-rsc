@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "build": "turbo db:generate && turbo build",
+    "postinstall": "turbo db:generate",
+    "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "type-check": "turbo type-check",

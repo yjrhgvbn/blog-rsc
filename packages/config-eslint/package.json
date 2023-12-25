@@ -7,6 +7,20 @@
     "next.js",
     "react-internal.js"
   ],
+  "exports": {
+    "./library.js": {
+      "import": "./library.js",
+      "require": "./library.js"
+    },
+    "./next.js": {
+      "import": "./next.js",
+      "require": "./next.js"
+    },
+    "./react-internal.js": {
+      "import": "./react-internal.js",
+      "require": "./react-internal.js"
+    }
+  },
   "devDependencies": {
     "@vercel/style-guide": "^5.1.0",
     "eslint-config-turbo": "^1.11.2",

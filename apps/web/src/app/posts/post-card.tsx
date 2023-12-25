@@ -20,12 +20,12 @@ export function PostCard(props: PostCardProps) {
           </Link>
         </h1>
         <div className="mb-3 flex flex-row flex-wrap items-center text-sm font-medium text-slate-500 dark:text-slate-400 mt-4">
-          <a aria-label={title} className="flex flex-row items-center gap-x-4" href={href}>
+          <a aria-label={time} className="flex flex-row items-center gap-x-4" href={href}>
             <span className="blog-post-card-time">{time}</span>
           </a>
         </div>
         <div className="block break-words text-lg leading-snug text-slate-700 dark:text-slate-400">
-          <Link aria-label={title} href={href} className="line-clamp-4">
+          <Link aria-label={content} href={href} className="line-clamp-4">
             {content}
           </Link>
         </div>

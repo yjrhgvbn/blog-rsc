@@ -12,17 +12,17 @@ export function Pagination(props: PaginationProps) {
   if (!total || total <= 1) return null;
   return (
     <nav aria-label="page navigation" className="m-auto w-full flex justify-center">
-      <ul className="list-style-none flex">
+      <ul className="list-style-none flex items-center">
         <li>
           <Link
             href={`${pathName}/${currentPage - 1}`}
             className={clsx(
-              "relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300  dark:text-white ",
+              "relative block rounded bg-transparent px-3 py-1.5 text-2xl  text-neutral-600 transition-all duration-300  dark:text-white ",
               currentPage === 1 ? "pointer-events-none" : "pointer-events-auto hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
             )}
-            aria-label="Previous"
+            aria-label="Previous &laquo;"
           >
-            <span aria-hidden="true">&laquo;</span>
+            &laquo;
           </Link>
         </li>
         {new Array(total).fill(0).map((_, index) => {
@@ -31,9 +31,10 @@ export function Pagination(props: PaginationProps) {
               <Link
                 href={`${pathName}/${index + 1}`}
                 className={clsx(
-                  "relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300  dark:text-white ",
+                  "relative block rounded bg-transparent px-3 py-1.5 text-xl  text-neutral-600 transition-all duration-300  dark:text-white ",
                   currentPage === index + 1 ? "pointer-events-none" : "pointer-events-auto hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
                 )}
+                aria-label={`Page ${index + 1}`}
               >
                 {index + 1}
               </Link>
@@ -44,12 +45,12 @@ export function Pagination(props: PaginationProps) {
           <Link
             href={`${pathName}/${currentPage + 1}`}
             className={clsx(
-              "relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300  dark:text-white ",
+              "relative block rounded bg-transparent px-3 py-1.5 text-2xl  text-neutral-600 transition-all duration-300  dark:text-white ",
               currentPage === total ? "pointer-events-none" : "pointer-events-auto hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
             )}
-            aria-label="Next"
+            aria-label="Next &raquo;"
           >
-            <span aria-hidden="true">&raquo;</span>
+            &raquo;
           </Link>
         </li>
       </ul>

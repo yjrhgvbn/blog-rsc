@@ -37,15 +37,15 @@ export const Typography = ({ source }: MarkdownProperties) => {
     const language = (node.data?.language as string) || "";
     const codeContent = (node.data?.codeContent as string) || "";
     return (
-      <div className={clsx("rounded-md border bg-gray-100 not-format ")}>
+      <div className={clsx("rounded-md border bg-white not-format overflow-hidden")}>
         {language ? (
           <div className={clsx("flex w-full items-center justify-between border-b ")}>
-            <h3 className={clsx("mx-5 my-0 h-full select-none py-1")}>{language}</h3>
+            <span className={clsx("mx-5 my-0 h-full select-none py-1 text-slate-800")}>{language}</span>
             <CopyButton text={codeContent} />
           </div>
         ) : null}
-        <pre className={clsx("overflow-auto py-2 px-4")}>
-          <code className="text-sm">{children}</code>
+        <pre className={clsx("overflow-auto py-2 px-4 bg-[#1e1e1e]")}>
+          <code className="text-sm text-[#DCDCDC]">{children}</code>
         </pre>
       </div>
     );

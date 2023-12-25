@@ -24,22 +24,24 @@ export default async function Page() {
       return Number(b.year) - Number(a.year);
     }) as { year: string; list: { id: string; title: string; time: Date; tags: string[] }[] }[];
   return (
-    <div className="mx-auto max-w-3xl">
+    <div className="mx-auto max-w-3xl ">
       {listGroupArr.map((item) => {
         return (
-          <div>
+          <div className="mx-2">
             <h1 className="text-4xl">{item.year}</h1>
             <div className="ml-6 mt-2">
               {item.list.map((item) => {
                 return (
                   <Link href={`/post/${item.id}`} className="relative mb-4 border-gray-200 dark:border-gray-700 flex items-center text-sm leading-none font-normal">
-                    <div className=" text-gray-400 dark:text-gray-500 text-lg">[{item.time.toLocaleDateString()}]</div>
+                    <div className="hidden sm:block text-gray-400 dark:text-gray-500 text-lg">[{item.time.toLocaleDateString()}]</div>
                     <div className="ml-2 text-2xl text-gray-700">{item.title}</div>
-                    {item.tags
-                      ? item.tags.map((tag) => {
-                          return <div className="ml-2 text-sm text-gray-400 dark:text-gray-500">#{tag}</div>;
-                        })
-                      : null}
+                    <div className="hidden sm:block">
+                      {item.tags
+                        ? item.tags.map((tag) => {
+                            return <span className="ml-2 text-sm text-gray-400 dark:text-gray-500">#{tag}</span>;
+                          })
+                        : null}
+                    </div>
                   </Link>
                 );
               })}

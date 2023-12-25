@@ -1,4 +1,4 @@
-import { getPostCount, getPostDetail, getPostList } from "@repo/api";
+import { getPostCount, getPostList } from "@repo/api";
 import { PostList } from "../post-list";
 
 export default async function Page({ params }: { params: { page: string } }) {

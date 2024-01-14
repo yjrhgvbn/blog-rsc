@@ -98,7 +98,7 @@ async function saveDiffFiles() {
         path,
         content,
         hash,
-        title: title.split(".").slice(0, -1).join("."), // remove .md
+        title: title!.split(".").slice(0, -1).join("."), // remove .md
         tags: {
           connectOrCreate: tags.map((tag) => {
             return {

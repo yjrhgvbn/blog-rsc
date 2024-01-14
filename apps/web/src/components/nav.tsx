@@ -31,17 +31,13 @@ export function MainNav() {
         {/* <div className="container flex h-14 items-center mx-auto max-w-3xl"> */}
         <div
           onClick={() => setIsShow(!isShow)}
-          className={clsx(
-            "sm:w-auto sm:space-x-6 sm:bg-inherit sm:flex-row sm:rounded-none sm:top-0 sm:border-none sm:flex",
-            "bg-gray-50 w-full absolute top-14 font-medium flex flex-col p-4 border border-gray-100 rounded-b-lg left-0",
-            !isShow && "hidden"
-          )}
+          className={clsx("sm:w-auto sm:static  sm:bg-inherit sm:flex-row sm:rounded-none sm:border-none sm:flex", "bg-gray-50 w-full absolute top-14 font-medium flex flex-col p-4 border border-gray-100 rounded-b-lg left-0", !isShow && "hidden")}
         >
           <div className="fixed sm:hidden top-0 left-0 right-0 bottom-0"></div>
-          <Link href="/" className="z-10 mr-12 block items-center space-x-2 font-bold">
+          <Link href="/" className="z-10 mr-12 block items-center font-bold">
             PalmPam
           </Link>
-          <Link href="/categories" className={clsx("z-10 mt-4 sm:mt-0 block transition-colors hover:text-slate-700", pathname?.startsWith("/categories") ? "text-slate-900" : "text-[#3C3C3D]")}>
+          <Link href="/categories" className={clsx("z-10 sm:mr-6 mt-4 sm:mt-0 block transition-colors hover:text-slate-700", pathname?.startsWith("/categories") ? "text-slate-900" : "text-[#3C3C3D]")}>
             Categories
           </Link>
           <Link href="/about" className={clsx("z-10 mt-4 sm:mt-0 block transition-colors hover:text-slate-700", pathname?.startsWith("/about") ? "text-slate-900" : "text-[#3C3C3D]")}>

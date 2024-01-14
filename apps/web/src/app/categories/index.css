@@ -1,0 +1,6 @@
+.year-title {
+  --un-text-stroke-opacity: 1;
+  -webkit-text-stroke-color: rgb(212 212 212 / 0.5);
+  -webkit-text-stroke-width: 2px;
+  color: transparent;
+}

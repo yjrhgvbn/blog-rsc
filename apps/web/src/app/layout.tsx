@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
       <body className={inter.className}>
         <div className="relative flex min-h-screen flex-col">
           <MainNav />
-          <main className="py-10">{children}</main>
+          <main className="">{children}</main>
         </div>
       </body>
     </html>

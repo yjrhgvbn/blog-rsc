@@ -8,7 +8,7 @@ import { MainNav } from "components/nav";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "blog",
+  title: "Blog - PalmPam",
   description: "PalmPam blog",
 };
 

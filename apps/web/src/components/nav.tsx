@@ -30,17 +30,33 @@ export function MainNav() {
         </div>
         {/* <div className="container flex h-14 items-center mx-auto max-w-3xl"> */}
         <div
-          onClick={() => setIsShow(!isShow)}
-          className={clsx("sm:w-auto sm:static  sm:bg-inherit sm:flex-row sm:rounded-none sm:border-none sm:flex", "bg-gray-50 w-full absolute top-14 font-medium flex flex-col p-4 border border-gray-100 rounded-b-lg left-0", !isShow && "hidden")}
+          onClick={() => setIsShow(false)}
+          className={clsx(
+            "sm:w-auto sm:static sm:bg-inherit sm:flex-row sm:rounded-none sm:border-none sm:flex sm:items-center",
+            "bg-gray-100 w-full absolute top-14 font-medium flex flex-col p-4 border border-gray-100 rounded-b-lg left-0",
+            !isShow && "hidden"
+          )}
         >
           <div className="fixed sm:hidden top-0 left-0 right-0 bottom-0"></div>
-          <Link href="/" className="z-10 mr-12 block items-center font-bold">
+          <Link href="/" className="z-10 mr-12 block items-center font-black text-2xl">
             PalmPam
           </Link>
-          <Link href="/categories" className={clsx("z-10 sm:mr-6 mt-4 sm:mt-0 block transition-colors hover:text-slate-700", pathname?.startsWith("/categories") ? "text-slate-900" : "text-[#3C3C3D]")}>
+          <Link
+            href="/categories"
+            className={clsx(
+              "z-10 sm:mr-6 mt-4 sm:mt-0 block transition-colors hover:text-slate-700",
+              pathname?.startsWith("/categories") ? "text-slate-900 font-bold" : "text-[#3C3C3D]"
+            )}
+          >
             Categories
           </Link>
-          <Link href="/about" className={clsx("z-10 mt-4 sm:mt-0 block transition-colors hover:text-slate-700", pathname?.startsWith("/about") ? "text-slate-900" : "text-[#3C3C3D]")}>
+          <Link
+            href="/about"
+            className={clsx(
+              "z-10 mt-4 sm:mt-0 block transition-colors hover:text-slate-700",
+              pathname?.startsWith("/about") ? "text-slate-900" : "text-[#3C3C3D]"
+            )}
+          >
             About
           </Link>
         </div>
@@ -48,7 +64,13 @@ export function MainNav() {
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none"></div>
           <nav className="flex items-center">
-            <Link href={"https://twitter.com/yongyuandebenp2"} target="_blank" rel="noreferrer" className="w-10" aria-label="Go to my twitter home page">
+            <Link
+              href={"https://twitter.com/yongyuandebenp2"}
+              target="_blank"
+              rel="noreferrer"
+              className="w-10"
+              aria-label="Go to my twitter home page"
+            >
               <Twitter size={"1.2rem"} className="m-auto" />
             </Link>
             <Link href={"https://github.com/yjrhgvbn"} target="_blank" rel="noreferrer" className="w-10" aria-label="Go to my github home page">

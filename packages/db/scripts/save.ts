@@ -47,6 +47,34 @@ async function getabsFilesWithHash(dir: string) {
   }
 }
 
+/**
+ * get head info
+ * ---
+ * key: value
+ * ---
+ */
+function getHeadInfoMark(data: string) {
+  const headInfoMark = data.match(/---\n([\s\S]*?)\n---/);
+  const content = data.replace(/---\n([\s\S]*?)\n---/, "");
+  const res = {
+    headInfo: {} as Record<string, string>,
+    content,
+  };
+  if (!headInfoMark?.[1]) return res;
+  const headInfo = headInfoMark[1];
+  const headInfoList = headInfo.split("\n");
+  const headInfoMap: Record<string, string> = {};
+  headInfoList.forEach((item) => {
+    const [key, value] = item.split(":");
+    if (!key || !value) return;
+    headInfoMap[key.trim()] = value.trim();
+  });
+  return {
+    headInfo: headInfoMap,
+    content,
+  };
+}
+
 type fileHashRecord = {
   path: string;
   hash: string;
@@ -85,20 +113,36 @@ async function getDiffFiles() {
   };
 }
 
+function readAndParseFile(filePath: string) {
+  const pathArr = filePath.trim().split("/").reverse();
+  const [title, ...tags] = pathArr;
+  const fileContent = fs.readFileSync(filePath, "utf-8");
+  const { headInfo, content } = getHeadInfoMark(fileContent);
+  return {
+    overview: headInfo.overview || headInfo.description,
+    content: content,
+    title: headInfo.title || title!.split(".").slice(0, -1).join("."), // remove .md
+    tags: headInfo.tags ? headInfo.tags.split(",") : tags?.slice(-1),
+    img: headInfo.img,
+    imgDescription: headInfo.imgDescription,
+  };
+}
+
 async function saveDiffFiles() {
   const { remove, add, update } = await getDiffFiles();
   await prisma.post.deleteMany({ where: { path: { in: remove.map((i) => i.path) } } });
   for (let i = 0; i < add.length; i++) {
     const { path, hash } = add[i]!;
-    const pathArr = path.split("/").reverse();
-    const [title, ...tags] = pathArr;
-    const content = fs.readFileSync(toAbsolutePath(path), "utf-8");
+    const { content, title, overview, tags, img, imgDescription } = readAndParseFile(toAbsolutePath(path));
     await prisma.post.create({
       data: {
         path,
         content,
         hash,
-        title: title!.split(".").slice(0, -1).join("."), // remove .md
+        overview,
+        title,
+        img,
+        imgDescription,
         tags: {
           connectOrCreate: tags.map((tag) => {
             return {
@@ -116,10 +160,29 @@ async function saveDiffFiles() {
   }
   await Promise.all(
     update.map(async ({ path, hash }) => {
-      const content = fs.readFileSync(toAbsolutePath(path), "utf-8");
+      const { content, title, overview, tags, img, imgDescription } = readAndParseFile(toAbsolutePath(path));
       await prisma.post.update({
         where: { path },
-        data: { content, hash },
+        data: {
+          content,
+          hash,
+          title,
+          overview,
+          img,
+          imgDescription,
+          tags: {
+            connectOrCreate: tags.map((tag) => {
+              return {
+                create: {
+                  name: tag,
+                },
+                where: {
+                  name: tag,
+                },
+              };
+            }),
+          },
+        },
       });
     })
   );

@@ -7,8 +7,8 @@ export const getPostDetail = wrapResponse(async (id: string) => {
   });
 });
 
-export const getPostList = wrapResponse(async (params?: { page: number; pageSize: number; title?: string; tags?: string }) => {
-  const { page = 1, pageSize = 1, title, tags } = params || {};
+export const getPostList = wrapResponse(async (params?: { page: number; pageSize: number; title?: string }) => {
+  const { page = 1, pageSize = 1, title } = params || {};
   const query: Prisma.PostFindManyArgs = {
     include: { tags: { select: { name: true } } },
     where: {
@@ -22,9 +22,9 @@ export const getPostList = wrapResponse(async (params?: { page: number; pageSize
         },
         {
           tags: {
-            some: {
+            every: {
               name: {
-                in: tags?.split(","),
+                notIn: ["week"],
               },
             },
           },

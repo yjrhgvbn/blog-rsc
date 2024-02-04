@@ -55,7 +55,7 @@ async function getabsFilesWithHash(dir: string) {
  */
 function getHeadInfoMark(data: string) {
   const headInfoMark = data.match(/---\n([\s\S]*?)\n---/);
-  const content = data.replace(/---\n([\s\S]*?)\n---/, "");
+  const content = data.replace(/---\n([\s\S]*?)\n---[\n]*/, "");
   const res = {
     headInfo: {} as Record<string, string>,
     content,
@@ -98,7 +98,7 @@ async function getDiffFiles() {
       return;
     }
     if (hash !== mapHash) {
-      updateFileHashList.push({ path, hash });
+      updateFileHashList.push({ path, hash: mapHash });
     }
   });
   Object.entries(absfileHashMap).forEach(([path, hash]) => {
@@ -114,18 +114,21 @@ async function getDiffFiles() {
 }
 
 function readAndParseFile(filePath: string) {
-  const pathArr = filePath.trim().split("/").reverse();
+  const pathArr = filePath.trim().split("/").filter(Boolean).reverse();
   const [title, ...tags] = pathArr;
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { headInfo, content } = getHeadInfoMark(fileContent);
-  return {
+  const headTags = headInfo.tags || headInfo.tag;
+  const res = {
     overview: headInfo.overview || headInfo.description,
     content: content,
     title: headInfo.title || title!.split(".").slice(0, -1).join("."), // remove .md
-    tags: headInfo.tags ? headInfo.tags.split(",") : tags?.slice(-1),
+    tags: headTags ? headTags.split(",") : tags?.slice(0, 1),
     img: headInfo.img,
     imgDescription: headInfo.imgDescription,
   };
+  console.table({ ...res, content: res.content.slice(0, 20) });
+  return res;
 }
 
 async function saveDiffFiles() {
@@ -164,6 +167,7 @@ async function saveDiffFiles() {
       await prisma.post.update({
         where: { path },
         data: {
+          path,
           content,
           hash,
           title,

@@ -32,7 +32,9 @@ export function Pagination(props: PaginationProps) {
                 href={`${pathName}/${index + 1}`}
                 className={clsx(
                   "relative block rounded bg-transparent px-3 py-1.5 text-xl  text-neutral-600 transition-all duration-300  dark:text-white ",
-                  currentPage === index + 1 ? "pointer-events-none" : "pointer-events-auto hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
+                  currentPage === index + 1
+                    ? "pointer-events-none"
+                    : "pointer-events-auto hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
                 )}
                 aria-label={`Page ${index + 1}`}
               >
@@ -46,7 +48,9 @@ export function Pagination(props: PaginationProps) {
             href={`${pathName}/${currentPage + 1}`}
             className={clsx(
               "relative block rounded bg-transparent px-3 py-1.5 text-2xl  text-neutral-600 transition-all duration-300  dark:text-white ",
-              currentPage === total ? "pointer-events-none" : "pointer-events-auto hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
+              currentPage === total
+                ? "pointer-events-none"
+                : "pointer-events-auto hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
             )}
             aria-label="Next &raquo;"
           >

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Css Filter Demo</title>
+    <style>
+      img {
+        filter: none;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="image" src="https://interactive-examples.mdn.mozilla.net/media/examples/firefox-logo.svg" style="width: 100px" />
+    <select id="filterSelect">
+      <option value="none">None</option>
+      <option value="grayscale(100%)">Grayscale</option>
+      <option value="blur(5px)">Blur</option>
+      <option value="brightness(150%)">Brightness</option>
+      <option value="contrast(200%)">Contrast</option>
+      <option value="drop-shadow(16px 16px 20px blue)">Drop Shadow</option>
+      <option value="hue-rotate(90deg)">Hue Rotate</option>
+      <option value="invert(100%)">Invert</option>
+      <option value="opacity(50%)">Opacity</option>
+      <option value="saturate(200%)">Saturate</option>
+      <option value="sepia(100%)">Sepia</option>
+    </select>
+    <input id="filterInput" type="text" />
+
+    <script>
+      const image = document.getElementById("image");
+      const filterSelect = document.getElementById("filterSelect");
+      const filterInput = document.getElementById("filterInput");
+
+      filterSelect.addEventListener("change", function () {
+        const selectedFilter = filterSelect.value;
+        filterInput.value = selectedFilter;
+        image.style.filter = selectedFilter;
+      });
+      filterInput.addEventListener("input", function () {
+        const selectedFilter = filterInput.value;
+        image.style.filter = selectedFilter;
+      });
+    </script>
+  </body>
+</html>

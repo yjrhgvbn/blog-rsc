@@ -15,12 +15,37 @@ const currentWeek = `${year}-${week.toString().padStart(2, "0")}`;
 const fileName = `${currentWeek}.md`;
 const filePath = path.join(__dirname, "..", "note/week", fileName);
 
+function num2str(num) {
+  return num.toString().padStart(2, "0");
+}
+
 const template = `---
-description: 好记性不如烂笔头，${year}年第五周周记
-tag: week
+description: 好记性不如烂笔头，${year}年第${numberToChinese(currentWeek)}周周记
+tags:
+  - week
 createDate: ${year}-${month.toString().padStart(2, "0")}-${now.getDate().toString().padStart(2, "0")}
 ---
 `;
 fs.writeFileSync(filePath, template);
 
 console.log(`Markdown file created: ${filePath}`);
+function numberToChinese(num) {
+  var chineseNumArr = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+  var unitArr = ["", "十", "百", "千"];
+
+  var result = "";
+  var numStr = num.toString();
+
+  for (var i = 0; i < numStr.length; i++) {
+    var digit = numStr.charAt(i);
+    var unit = unitArr[numStr.length - 1 - i];
+    result += chineseNumArr[parseInt(digit)] + unit;
+  }
+
+  result = result
+    .replace(/零(十|百|千)/g, "零")
+    .replace(/零+/g, "零")
+    .replace(/零+$/g, "");
+
+  return result;
+}

@@ -1,6 +1,10 @@
 ---
 description: 事情要从一次input标签的光标问题说起，在异步更新state会导致input的光标自动移到最后，研究源码后才发现里面比我想象的多。
-tag: react
+tags:
+  - react
+lastmod: 2024-03-03T09:13:08.059Z
+date: 2024-02-01T09:12:57.000Z
+draft: false
 ---
 
 之前碰到一个react光标的问题，类似的复现如下

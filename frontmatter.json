@@ -1,0 +1,78 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.content.autoUpdateDate": true,
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "default",
+      "pageBundle": false,
+      "previewPath": null,
+      "fields": [
+        {
+          "title": "Draft",
+          "name": "draft",
+          "type": "draft"
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "Publishing date",
+          "name": "date",
+          "type": "datetime",
+          "isPublishDate": true
+        },
+        {
+          "title": "Last modified date",
+          "name": "lastmod",
+          "type": "datetime",
+          "isModifiedDate": true
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "tags"
+        }
+      ]
+    }
+  ],
+  "frontMatter.framework.id": "next",
+  "frontMatter.content.publicFolder": "public",
+  "frontMatter.preview.host": "http://localhost:3000",
+  "frontMatter.content.pageFolders": [
+    {
+      "path": "[[workspace]]/note/github",
+      "title": "github"
+    },
+    {
+      "path": "[[workspace]]/note/react",
+      "title": "react"
+    },
+    {
+      "path": "[[workspace]]/note/tool",
+      "title": "tool"
+    },
+    {
+      "path": "[[workspace]]/note/week",
+      "title": "week"
+    },
+    {
+      "path": "[[workspace]]/note/归档",
+      "title": "归档"
+    },
+    {
+      "path": "[[workspace]]/note/随记",
+      "title": "随记"
+    },
+    {
+      "path": "[[workspace]]/note/脚本",
+      "title": "脚本"
+    },
+    {
+      "title": "css",
+      "path": "[[workspace]]/note/css"
+    }
+  ],
+  "frontMatter.git.enabled": true
+}

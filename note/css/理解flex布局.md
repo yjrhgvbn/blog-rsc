@@ -1,6 +1,10 @@
 ---
 description: flex布局算是前端的必修课了，而这篇文章就讲讲我是如何理解flex布局的。
-tag: css
+date: 2024-03-03T08:49:39.165Z
+lastmod: 2024-03-03T08:58:52.924Z
+draft: false
+tags:
+  - css
 ---
 
 这篇文章不会具体讲各个属性有什么效果，只会简单介绍下部分属性。相反，这篇文章主要讲的是我是怎么理解flex布局，在我看来，属性的意义是什么，这个命名有用什么含义。这篇文章建议配置这个[网站](https://flexbox.help)一起使用
@@ -55,7 +59,7 @@ tag: css
 </div>
 ```
 
-![base flex layout](https://github.com/yjrhgvbn/picx-images-hosting/raw/master/image.8kztrib5wf.webp)
+![base flex layout](https://cdn.jsdelivr.net/gh/yjrhgvbn/picx-images-hosting@master/image.8kztrib5wf.webp)
 
 ### flex-basis
 
@@ -69,7 +73,7 @@ tag: css
 
 再看我们开始的例子，看看有什么可以改进的地方。
 
-![base flex layout](https://github.com/yjrhgvbn/picx-images-hosting/raw/master/image.8kztrib5wf.webp)
+![base flex layout](https://cdn.jsdelivr.net/gh/yjrhgvbn/picx-images-hosting@master/image.8kztrib5wf.webp)
 
 你发现目前布局中右侧还有一块空间，而且元素却都集中在左侧，这个看上去不太美观。所以你打算先对这块做优化，让元素在有额外空间时能展示的更灵活些，大概有两个方案。
 
@@ -82,7 +86,7 @@ tag: css
 
 后面是确认各类规则的事情了，就不具体介绍了，可以点[这里](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content)了解。现在尝试下在`.content`类中加上`justify-content: space-between`，让布局均匀排列每个元素。
 
-![flex layout with justify-content: space-between](https://github.com/yjrhgvbn/picx-images-hosting/raw/master/image-1.9dcp98rrmj.webp)
+![flex layout with justify-content: space-between](https://cdn.jsdelivr.net/gh/yjrhgvbn/picx-images-hosting@master/image-1.9dcp98rrmj.webp)
 
 ### align-self
 
@@ -97,7 +101,7 @@ tag: css
 }
 ```
 
-![flex layout with margin](https://github.com/yjrhgvbn/picx-images-hosting/raw/master/image-2.5tqrjfp1um.webp)
+![flex layout with margin](https://cdn.jsdelivr.net/gh/yjrhgvbn/picx-images-hosting@master/image-2.5tqrjfp1um.webp)
 
 事实就是真实的flex标准，这块可以通过`margin`和`height`组合做出类似的效果。但最后你还是觉得加个属性进行控制，一方面是为了语意更加清晰，另一方也是为了一些flex布局独特的对齐方式，例如根据布局的文字对齐（baseline）。
 
@@ -152,7 +156,7 @@ tag: css
 </div>
 ```
 
-![flex layout with wrap](https://github.com/yjrhgvbn/picx-images-hosting/raw/master/image-3.58h3x4uljx.webp)
+![flex layout with wrap](https://cdn.jsdelivr.net/gh/yjrhgvbn/picx-images-hosting@master/image-3.58h3x4uljx.webp)
 
 注意，这里加了`align-content: start`只是为了更好的说明，因为默认情况下多行会自动分配空间，但毕竟我们现在假设没有flex布局，所以我们让多行之间向上靠齐，这样更符合我们的假设。
 
@@ -161,11 +165,11 @@ tag: css
 ### align-content
 
 现在让我们做个抽象处理，我们并不关注行内的元素，我们只关系行之间的关系，那么把一行当成一这个整体看待，现在就类似于在处理这种情况。
-![abstract line](https://github.com/yjrhgvbn/picx-images-hosting/raw/master/image-4.5c0puuno9u.webp)
+![abstract line](https://cdn.jsdelivr.net/gh/yjrhgvbn/picx-images-hosting@master/image-4.5c0puuno9u.webp)
 
 是不是感觉似曾相识，没有？别着急，让我们逆时针旋转90度再看下。
 
-![abstract line with turning counterclockwise](https://github.com/yjrhgvbn/picx-images-hosting/raw/master/image-6.8hg7tsi36o.webp)
+![abstract line with turning counterclockwise](https://cdn.jsdelivr.net/gh/yjrhgvbn/picx-images-hosting@master/image-6.8hg7tsi36o.webp)
 
 看出来了吗？这个和我们介绍`justify-content`时的例子非常类似，只是这次由水平方向改为了垂直方向
 
@@ -175,7 +179,7 @@ tag: css
 
 现在尝试在content类中加入`align-content: space-between`
 
-![flex layout with align-content space-between](https://github.com/yjrhgvbn/picx-images-hosting/raw/master/image-5.60tzevb7a9.webp)
+![flex layout with align-content space-between](https://cdn.jsdelivr.net/gh/yjrhgvbn/picx-images-hosting@master/image-5.60tzevb7a9.webp)
 
 ### justify-self
 
@@ -189,7 +193,7 @@ tag: css
 
 如果你之前学过flex，应该有听过主轴和交错轴的概念，现在我们也是时候引入这个概念了。当然你不必过度纠结这个概念，引入轴是为了更好的表示布局的方向，要是觉得这个说法不能帮你确认布局的方向，你也可以抽象成其他概念。
 
-![flex-axis](https://github.com/yjrhgvbn/picx-images-hosting/raw/master/flex-axis.92pvg3asv6.webp)
+![flex-axis](https://cdn.jsdelivr.net/gh/yjrhgvbn/picx-images-hosting@master/flex-axis.92pvg3asv6.webp)
 
 主轴，可以理解是单行时元素的排列方向，默认情况下和文本方向一致的，在中文环境下是水平从左到右。
 

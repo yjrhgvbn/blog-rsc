@@ -1,3 +1,11 @@
+---
+draft: false
+description: |
+  karabiner-elements是一款很强大的mac开源改建软件，可以通过配置设置自己自定义的映射规则，甚至可以执行控制台命令！
+lastmod: 2024-03-03T09:16:58.016Z
+date: 2023-05-03T09:16:41.000Z
+---
+
 # Karabiner Elements
 
 [karabiner-elements](https://karabiner-elements.pqrs.org/)是一款很强大的mac开源改建软件，可以通过配置设置自己自定义的映射规则，甚至可以执行控制台命令！
@@ -22,24 +30,24 @@
 
 ```json
 {
-      "description": "测试",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": { "key_code": "a", "modifiers": { "mandatory": ["left_shift"] } },
-          "to": [{ "key_code": "b" }]
-        }
-      ]
+  "description": "测试",
+  "manipulators": [
+    {
+      "type": "basic",
+      "from": { "key_code": "a", "modifiers": { "mandatory": ["left_shift"] } },
+      "to": [{ "key_code": "b" }]
     }
+  ]
+}
 ```
 
 上面一个规则的配置，description是这个规则的描述，manipulators是具体映射，可以有多个值，主要看第一个对象。
 
-* type表示这个映射类型，基本是basic，其他类型可以查看[官网](https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/other-types/)。
+- type表示这个映射类型，基本是basic，其他类型可以查看[官网](https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/other-types/)。
 
-* from表示映射的输入，key_code可以看的出来，表示的是按下的按钮，modifiers是对基础键的修饰，mandatory 表示必须与基础键一起出现的键，这里是左shift
+- from表示映射的输入，key_code可以看的出来，表示的是按下的按钮，modifiers是对基础键的修饰，mandatory 表示必须与基础键一起出现的键，这里是左shift
 
-* to表示映射的输出，这里表示按下b键
+- to表示映射的输出，这里表示按下b键
 
 如果需要知道某个按键对应的 key_code，可以打开提供的另一个app，[Karabiner EventViewer](https://karabiner-elements.pqrs.org/docs/manual/operation/eventviewer/)查看，安装时会自动安装。
 
@@ -127,9 +135,9 @@ writeToProfile("test", ruler);
 }
 ```
 
-* set_variable 设置变量，这里设置了一个变量，当分号按下时，设置为1，松开时设置为0，这里是为了判断是否按下分号，如果按下分号，再按下其他键，就会触发映射。
-* to_after_key_up 松开按键后触发的操作，这里是清空变量
-* conditions 条件，这里是判断变量是否为1，如果不为1，就不会触发映射，这里的变量名要与上面的一致。
+- set_variable 设置变量，这里设置了一个变量，当分号按下时，设置为1，松开时设置为0，这里是为了判断是否按下分号，如果按下分号，再按下其他键，就会触发映射。
+- to_after_key_up 松开按键后触发的操作，这里是清空变量
+- conditions 条件，这里是判断变量是否为1，如果不为1，就不会触发映射，这里的变量名要与上面的一致。
 
 ## 设置多个修饰键
 

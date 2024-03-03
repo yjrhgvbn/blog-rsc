@@ -5,8 +5,8 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
+  provider     = "sqlite"
+  url          = "file:./db/prod.db"
   relationMode = "prisma"
 }
 
@@ -40,15 +40,11 @@ model Session {
   @@index([userId])
 }
 
-enum RoleTypes {
-  USER
-  ADMIN
-}
 
 model Role {
   id   String    @id @default(uuid())
   user User[]
-  role RoleTypes @unique
+  role String
 }
 
 model User {
@@ -73,7 +69,7 @@ model Post {
   updatedAt      DateTime   @updatedAt
   published      Boolean    @default(true)
   overview       String?
-  content        String?    @db.MediumText
+  content        String? 
   authorId       String?
   img            String?
   imgDescription String?

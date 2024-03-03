@@ -1,10 +1,10 @@
 ---
 draft: false
-date: 2023-11-29T09:10:35.000Z
-lastmod: 2024-03-03T09:12:37.026Z
+createdAt: 2023-11-29T09:10:35.000Z
 description: 记录下node事件循环process.nextTick()和Promise.then优先级的问题
 tags:
   - node
+updatedAt: 2024-03-03T10:06:38.852Z
 ---
 
 最近在学习 nodejs 的事件循环，提到了`process.nextTick()`和`Promise.then`优先级的问题，虽然一般来说前者优先级是高后面的，但执行情况可能会不一样

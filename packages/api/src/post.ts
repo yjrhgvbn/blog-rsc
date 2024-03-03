@@ -12,7 +12,7 @@ export const getPostList = wrapResponse(async (params?: { page: number; pageSize
   const query: Prisma.PostFindManyArgs = {
     include: { tags: { select: { name: true } } },
     where: {
-      published: true,
+      content: { not: null },
       title: { contains: title || "" },
       OR: [
         {

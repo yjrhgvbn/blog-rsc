@@ -1,8 +1,8 @@
 ---
 draft: false
 description: 以alfred5为例，实现一个能在iterm2运行指定命令的工作流，这里实现一个git控制的工作流
-date: 2023-06-28T09:17:57.000Z
-lastmod: 2024-03-03T09:18:11.492Z
+createdAt: 2023-06-28T09:17:57.000Z
+updatedAt: 2024-03-03T10:06:33.563Z
 ---
 
 # alfred工作流脚本

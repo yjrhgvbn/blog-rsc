@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Css Filter Demo</title>
+    <style>
+      .contain {
+        height: 500px;
+      }
+      .content {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        /* align-content: flex-start; */
+        /* justify-items: flex-end; */
+        /* justify-content: flex-end; */
+        align-items: flex-end;
+        gap: 10px;
+      }
+      .item {
+        /* justify-self: self-start; */
+        /* align-items: start; */
+        align-self: self-end;
+        background-color: red;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contain">
+      <div class="content">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -2,8 +2,8 @@
 draft: false
 description: |
   karabiner-elements是一款很强大的mac开源改建软件，可以通过配置设置自己自定义的映射规则，甚至可以执行控制台命令！
-lastmod: 2024-03-03T09:16:58.016Z
-date: 2023-05-03T09:16:41.000Z
+createdAt: 2023-05-03T09:16:41.000Z
+updatedAt: 2024-03-03T10:06:27.067Z
 ---
 
 # Karabiner Elements

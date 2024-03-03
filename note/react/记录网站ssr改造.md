@@ -1,10 +1,10 @@
 ---
-date: 2023-06-26T09:13:27.000Z
-lastmod: 2024-03-03T09:17:32.626Z
+createdAt: 2023-06-26T09:13:27.000Z
 draft: false
 description: 记录下ssr改造遇到的一些问题
 tags:
   - react
+updatedAt: 2024-03-03T10:06:21.767Z
 ---
 
 最近花时间吧网站改造成ssr，主要是为了首屏展示的优化，因为之前是使用Suspense挂着路由的，所以每次都需要展示一次路由加载的loading和查询数据的loadloading，体验不太好。

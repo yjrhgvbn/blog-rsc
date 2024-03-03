@@ -18,14 +18,13 @@
           "type": "string"
         },
         {
-          "title": "Publishing date",
-          "name": "date",
-          "type": "datetime",
-          "isPublishDate": true
+          "title": "create date",
+          "name": "createdAt",
+          "type": "datetime"
         },
         {
           "title": "Last modified date",
-          "name": "lastmod",
+          "name": "updatedAt",
           "type": "datetime",
           "isModifiedDate": true
         },
@@ -33,6 +32,16 @@
           "title": "Tags",
           "name": "tags",
           "type": "tags"
+        },
+        {
+          "title": "img preview",
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "title": "img description",
+          "name": "imgDescription",
+          "type": "string"
         }
       ]
     }

@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import { hashFileSync } from "hasha";
 import { prisma } from "../src";
+import matter from "gray-matter";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -47,32 +48,26 @@ async function getabsFilesWithHash(dir: string) {
   }
 }
 
+interface HeadInfoData {
+  description?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  tags?: string[];
+  draft?: boolean;
+  img?: string;
+  imgDescription?: string;
+}
 /**
  * get head info
- * ---
- * key: value
- * ---
  */
 function getHeadInfoMark(data: string) {
-  const headInfoMark = data.match(/---\n([\s\S]*?)\n---/);
-  const content = data.replace(/---\n([\s\S]*?)\n---[\n]*/, "");
-  const res = {
-    headInfo: {} as Record<string, string>,
-    content,
+  const res = matter(data) as {
+    content: string;
+    data: HeadInfoData;
   };
-  if (!headInfoMark?.[1]) return res;
-  const headInfo = headInfoMark[1];
-  const headInfoList = headInfo.split("\n");
-  const headInfoMap: Record<string, string> = {};
-  headInfoList.forEach((item) => {
-    const [key, value] = item.split(":");
-    if (!key || !value) return;
-    headInfoMap[key.trim()] = value.trim();
-  });
-  return {
-    headInfo: headInfoMap,
-    content,
-  };
+  // remove content blank line
+  res.content = res.content.trim();
+  return res;
 }
 
 type fileHashRecord = {
@@ -115,19 +110,23 @@ async function getDiffFiles() {
 
 function readAndParseFile(filePath: string) {
   const pathArr = filePath.trim().split("/").filter(Boolean).reverse();
-  const [title, ...tags] = pathArr;
+  const [pathTitle, ...pathTag] = pathArr;
   const fileContent = fs.readFileSync(filePath, "utf-8");
-  const { headInfo, content } = getHeadInfoMark(fileContent);
-  const headTags = headInfo.tags || headInfo.tag;
+  const { data: headInfo, content } = getHeadInfoMark(fileContent);
+  const title = pathTitle!.split(".").slice(0, -1).join("."); // remove .md
+  const headTags = headInfo.tags;
   const res = {
-    overview: headInfo.overview || headInfo.description,
+    published: !headInfo.draft,
+    overview: headInfo.description || "",
     content: content,
-    title: headInfo.title || title!.split(".").slice(0, -1).join("."), // remove .md
-    tags: headTags ? headTags.split(",") : tags?.slice(0, 1),
+    title,
+    tags: headTags || pathTag?.slice(0, 1),
     img: headInfo.img,
-    imgDescription: headInfo.imgDescription,
+    imgDescription: headInfo.imgDescription || title,
+    createdAt: headInfo.createdAt,
+    updatedAt: headInfo.createdAt,
   };
-  console.table({ ...res, content: res.content.slice(0, 20) });
+  // console.table({ ...res, content: res.content.slice(0, 20) });
   return res;
 }
 
@@ -136,18 +135,14 @@ async function saveDiffFiles() {
   await prisma.post.deleteMany({ where: { path: { in: remove.map((i) => i.path) } } });
   for (let i = 0; i < add.length; i++) {
     const { path, hash } = add[i]!;
-    const { content, title, overview, tags, img, imgDescription } = readAndParseFile(toAbsolutePath(path));
+    const { tags, ...rest } = readAndParseFile(toAbsolutePath(path));
     await prisma.post.create({
       data: {
         path,
-        content,
         hash,
-        overview,
-        title,
-        img,
-        imgDescription,
+        ...rest,
         tags: {
-          connectOrCreate: tags.map((tag) => {
+          connectOrCreate: tags.map((tag: any) => {
             return {
               create: {
                 name: tag,
@@ -161,21 +156,18 @@ async function saveDiffFiles() {
       },
     });
   }
+
   await Promise.all(
-    update.map(async ({ path, hash }) => {
-      const { content, title, overview, tags, img, imgDescription } = readAndParseFile(toAbsolutePath(path));
+    update.slice(0, 1).map(async ({ path, hash }) => {
+      const { tags, ...rest } = readAndParseFile(toAbsolutePath(path));
       await prisma.post.update({
         where: { path },
         data: {
           path,
-          content,
           hash,
-          title,
-          overview,
-          img,
-          imgDescription,
+          ...rest,
           tags: {
-            connectOrCreate: tags.map((tag) => {
+            connectOrCreate: tags.map((tag: any) => {
               return {
                 create: {
                   name: tag,

@@ -20,7 +20,7 @@ function num2str(num) {
 }
 
 const template = `---
-description: 好记性不如烂笔头，${year}年第${numberToChinese(currentWeek)}周周记
+description: 好记性不如烂笔头，${year}年第${numberToChinese(week)}周周记
 tags:
   - week
 createDate: ${year}-${month.toString().padStart(2, "0")}-${now.getDate().toString().padStart(2, "0")}

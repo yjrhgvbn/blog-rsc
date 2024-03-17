@@ -123,7 +123,7 @@ function readAndParseFile(filePath: string) {
     tags: headTags || pathTag?.slice(0, 1),
     img: headInfo.img,
     imgDescription: headInfo.imgDescription || title,
-    createdAt: headInfo.createdAt,
+    createdAt: headInfo.createdAt ? new Date(headInfo.createdAt) : headInfo.createdAt,
     updatedAt: headInfo.createdAt,
   };
   // console.table({ ...res, content: res.content.slice(0, 20) });

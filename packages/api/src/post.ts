@@ -54,6 +54,9 @@ export const getPostTotallPage = wrapResponse(async () => {
 export const getALlPost = wrapResponse(async () => {
   const res = await prisma.post.findMany({
     include: { tags: { select: { name: true } } },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return res.map((item) => {
     return {

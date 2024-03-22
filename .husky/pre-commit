@@ -1,0 +1,2 @@
+pnpm db:note
+git add packages/db/db/prod.db

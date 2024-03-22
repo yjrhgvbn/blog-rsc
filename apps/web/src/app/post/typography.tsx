@@ -56,7 +56,7 @@ export const Typography = ({ source }: MarkdownProperties) => {
   }, []);
 
   return (
-    <article className={"mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert px-4"}>
+    <article className={"mx-auto w-full max-w-3xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert"}>
       <ReactMarkdown
         components={{
           code: ReactMarkdownComponents,

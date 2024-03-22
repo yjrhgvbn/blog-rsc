@@ -7,7 +7,7 @@ export async function PostList(props: { page: number }) {
   if (!dataRespone.sucess) return <div>error</div>;
   const { total = 0, content: postList } = dataRespone.data;
   return (
-    <div className="mx-auto max-w-3xl pb-10 ">
+    <div className="mx-auto max-w-3xl py-8 ">
       {postList.map((post) => {
         return (
           <PostCard

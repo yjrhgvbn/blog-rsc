@@ -10,11 +10,11 @@ updatedAt: 2024-03-03T10:30:55.831Z
 
 2. 写引言：在文章列表一般都需要一个引言，但估计一般人不太愿意写，当然我也是一样。
 
-想解决上面的问题，需要上传能自动重复备份，或者备份时自动触发上传，这里很难不联系到CI\CD。我们完全可以使用同样的思路，通过[GitHub Action](https://github.com/features/actions)来处理。使用github作为文章备份服务，每次提交时上传。至于引言，可以在action中通过AI生成。
+想解决上面的问题，需要上传能自动重复备份，或者备份时自动触发上传，这里很难不联系到 CI\CD。我们完全可以使用同样的思路，通过[GitHub Action](https://github.com/features/actions)来处理。使用 github 作为文章备份服务，每次提交时上传。至于引言，可以在 action 中通过 AI 生成。
 
 ## 创建备份仓库
 
-这里使用node作为上传服务
+这里使用 node 作为上传服务
 
 在目录创建`upload.js`文件，假设已经存在一个`publicServe`的方法上传文章
 
@@ -57,7 +57,7 @@ function getDiffFiles(latestCommitSha, prevCommitSha) {
 
 ## 生成文章开篇
 
-这里使用chatgpt生成开篇，使用[chatgpt](https://www.npmjs.com/package/chatgpt)包，chatgpt的apiKey通常保存在[github secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)中，通过环境变量或者参数传递进来。考虑到gpt服务可能不稳定，一般需要多试几遍。
+这里使用 chatgpt 生成开篇，使用[chatgpt](https://www.npmjs.com/package/chatgpt)包，chatgpt 的 apiKey 通常保存在[github secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)中，通过环境变量或者参数传递进来。考虑到 gpt 服务可能不稳定，一般需要多试几遍。
 
 ```javascript
 import { ChatGPTAPI } from "chatgpt";
@@ -117,31 +117,31 @@ function ensureDiffFiles(latestCommitSha, prevCommitSha, preFailRecord) {
 }
 ```
 
-preFailRecord是记录上次执行失败的文件。这里需要考虑文件重命名的情况，删除等更复杂的情况暂时没有处理。
+preFailRecord 是记录上次执行失败的文件。这里需要考虑文件重命名的情况，删除等更复杂的情况暂时没有处理。
 
 ## 保存记录
 
 在这里有三类数据需要额外记录
 
-1. 上次触发action的sha，因为操作提交多次然后才上传的情况，不可能直接取上一次提交sha。
+1. 上次触发 action 的 sha，因为操作提交多次然后才上传的情况，不可能直接取上一次提交 sha。
 
-2. 失败记录，就是前面preFailRecord参数，因为不保证上传能一次性成功，需要加入后续action中重新执行
+2. 失败记录，就是前面 preFailRecord 参数，因为不保证上传能一次性成功，需要加入后续 action 中重新执行
 
-3. 文件对应的上传数据，例如上传完成后返回的文件id，用于更新或者判断是否需要生成开篇。
+3. 文件对应的上传数据，例如上传完成后返回的文件 id，用于更新或者判断是否需要生成开篇。
 
 后面的问题是在哪里保存这些数据
 
 1. 在本仓库下保存，好处是容易读取和修改，缺点是提交记录会很难看
 
-2. 通过action缓存记录，缺点不易于本地测试，读取和修改也比较麻烦
+2. 通过 action 缓存记录，缺点不易于本地测试，读取和修改也比较麻烦
 
 3. 通过服务器缓存，缺点是比较繁琐，需要额外的维护
 
-4. 子模块，这个无疑是最合适的方案，随时修改和读取，也可以免费托管到github上，也不会影响主仓库git提交记录
+4. 子模块，这个无疑是最合适的方案，随时修改和读取，也可以免费托管到 github 上，也不会影响主仓库 git 提交记录
 
-git子模块可以参考这个[文档]((https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
+git 子模块可以参考这个[文档]((https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
 
-首先在github创建一个缓存仓库，这里起名cache
+首先在 github 创建一个缓存仓库，这里起名 cache
 
 然后添加到仓库下
 
@@ -149,15 +149,15 @@ git子模块可以参考这个[文档]((https://git-scm.com/book/zh/v2/Git-%E5%B
 git submodule add https://github.com/user/cache
 ```
 
-会看到一个cache目录，然后在主模块目录下推送上去就好了。
+会看到一个 cache 目录，然后在主模块目录下推送上去就好了。
 
-这里需要在子模块（cache目录下）创建3个文件， `sha.json`   `recordFail.json` `record.json` ，对应上面三类数据，初始值写入`{}`就可以。
+这里需要在子模块（cache 目录下）创建 3 个文件， `sha.json`   `recordFail.json` `record.json` ，对应上面三类数据，初始值写入`{}`就可以。
 
-然后在cache目录下执行`git push`就可以更新子模块了
+然后在 cache 目录下执行`git push`就可以更新子模块了
 
 ## 整合
 
-根据上传结果更新json文件就可以
+根据上传结果更新 json 文件就可以
 
 ```javascript
 import { readFileSync, writeFileSync } from "fs";
@@ -204,17 +204,17 @@ async function main() {
 function getFileName(path) {
   return path.split("/").pop().split(".")[0];
 }
-// 读取json文件
+// 读取 json 文件
 function readJsonFile(path) {
   return JSON.parse(readFileSync(path, "utf-8"));
 }
-// 保存json文件
+// 保存 json 文件
 function saveJsonFile(path, data) {
   writeFileSync(path, JSON.stringify(data, null, 2));
 }
 ```
 
-## 增加action
+## 增加 action
 
 创建文件`.github/workflows/upload.yml`
 
@@ -276,15 +276,15 @@ jobs:
           force: true
 ```
 
-action这里不多结束，只有有几个注意的地方
+action 这里不多结束，只有有几个注意的地方
 
 1. `permissions: write-all`需要增加写入权限，不然无法更新文件
 
-2. `fetch-depth: 0`，默认情况下[actions/checkout@v3](https://github.com/actions/checkout)只会拉取最后一次提交，这里需要拉取之前的提交进行diff
+2. `fetch-depth: 0`，默认情况下[actions/checkout@v3](https://github.com/actions/checkout)只会拉取最后一次提交，这里需要拉取之前的提交进行 diff
 
 3. `git submodule update --recursive --remote`，拉取最新的子模块
 
-4. `git config --global core.quotepath false`，防止diff时中文乱码
+4. `git config --global core.quotepath false`，防止 diff 时中文乱码
 
 ## 最后
 

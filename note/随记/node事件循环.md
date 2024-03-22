@@ -1,7 +1,7 @@
 ---
 draft: false
 createdAt: 2023-11-29T09:10:35.000Z
-description: 记录下node事件循环process.nextTick()和Promise.then优先级的问题
+description: 记录下 node 事件循环 process.nextTick() 和 Promise.then 优先级的问题
 tags:
   - node
 updatedAt: 2024-03-03T10:06:38.852Z

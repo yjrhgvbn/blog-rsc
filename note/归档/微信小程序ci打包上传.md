@@ -4,7 +4,7 @@ createdAt: 2022-08-01T09:17:57.000Z
 updatedAt: 2024-03-03T10:25:30.294Z
 ---
 
-# 微信小程序ci打包上传
+# 微信小程序 ci 打包上传
 
 1、命令行：[https://developers.weixin.qq.com/miniprogram/dev/devtools/cli.html#自动预览](https://developers.weixin.qq.com/miniprogram/dev/devtools/cli.html#%E8%87%AA%E5%8A%A8%E9%A2%84%E8%A7%88)
 

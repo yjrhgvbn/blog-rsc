@@ -1,0 +1,24 @@
+{
+  "name": "@repo/tool",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "sync:db": "dotenv -e ../../.env tsx ./src/sync_db.ts"
+  },
+  "dependencies": {
+    "@repo/db": "workspace:*",
+    "@types/node": "^20.11.30",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.1",
+    "hasha": "^6.0.0",
+    "prisma": "^5.11.0",
+    "tsx": "^4.7.1"
+  }
+}

@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import { hashFileSync } from "hasha";
-import { prisma } from "../src";
+import { prisma } from "@repo/db";
 import matter from "gray-matter";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -159,8 +159,8 @@ async function saveDiffFiles() {
     });
   }
 
-  await Promise.all(
-    update.slice(0, 1).map(async ({ path, hash }) => {
+  await Promise.allSettled(
+    update.map(async ({ path, hash }) => {
       const { tags, ...rest } = readAndParseFile(toAbsolutePath(path));
       await prisma.post.update({
         where: { path },

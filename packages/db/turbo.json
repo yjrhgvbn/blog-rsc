@@ -21,12 +21,6 @@
     "db:prod:seed": {
       "dependsOn": ["db:push"],
       "cache": false
-    },
-    "db:studio": {
-      "cache": false
-    },
-    "db:note": {
-      "cache": false
     }
   }
 }

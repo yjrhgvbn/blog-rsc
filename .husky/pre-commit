@@ -1,3 +1,3 @@
 pnpm lint-staged
-pnpm db:note
+pnpm sync:db
 git add packages/db/db/prod.db

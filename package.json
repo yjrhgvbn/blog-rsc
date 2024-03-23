@@ -9,18 +9,18 @@
     "lint-staged": "lint-staged",
     "db:push": "turbo db:push",
     "db:generate": "turbo db:generate",
-    "db:note": "turbo db:note",
+    "sync:db": "turbo sync:db",
     "prepare": "husky"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
     "autocorrect-node": "^2.9.0",
-    "eslint": "^8.55.0",
+    "eslint": "^8.57.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "prettier": "^3.1.0",
-    "prettier-plugin-tailwindcss": "^0.5.9",
-    "turbo": "^1.11.1"
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.12",
+    "turbo": "^1.13.0"
   },
   "engines": {
     "node": ">=18"

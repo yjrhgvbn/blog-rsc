@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 const now = new Date();
 const start = new Date(now.getFullYear(), 0, 0);

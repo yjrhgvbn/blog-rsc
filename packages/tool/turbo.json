@@ -1,0 +1,8 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "sync:db": {
+      "cache": false
+    }
+  }
+}

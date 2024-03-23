@@ -40,6 +40,8 @@ async function getabsFilesWithHash(dir: string) {
       if (fs.statSync(curFilePath).isDirectory()) {
         loopDir(curFilePath);
       } else {
+        // only get .md file
+        if (path.extname(file) !== ".md") return;
         if (file[0] === ".") return;
         const fileHash = hashFileSync(curFilePath, { algorithm: "md5" });
         hasFileMap[fileHash] = curFilePath;

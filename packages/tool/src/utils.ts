@@ -42,7 +42,7 @@ function getFileHash(dir: string) {
 
 export function getAllNoteMdFiles() {
   const dir = NOTE_PATH;
-  const files: { relateNodePath: string; absolutePath: string }[] = [];
+  const files: { relateNotePath: string; absolutePath: string }[] = [];
   loopDir(dir);
   return files;
 
@@ -54,7 +54,7 @@ export function getAllNoteMdFiles() {
       } else {
         if (path.extname(file) !== ".md") return;
         if (file[0] === ".") return;
-        files.push({ relateNodePath: toRelateNotePath(curFilePath), absolutePath: curFilePath });
+        files.push({ relateNotePath: toRelateNotePath(curFilePath), absolutePath: curFilePath });
       }
     });
   }

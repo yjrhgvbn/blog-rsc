@@ -3,7 +3,7 @@
  * download all pictures to this repo and update the img path in the markdown files
  */
 import path from "path";
-import { getLinkPath, isCurRepoPath, downloadPic, getAllNoteMdFiles, mdPathToAbsolute } from "./utils";
+import { getLinkPath, isCurRepoPath, downloadPic, getAllNoteMdFiles, mdPathToAbsolute, getDiffFiles } from "./utils";
 import remarkFrontmatter from "remark-frontmatter";
 import fs from "node:fs";
 import remarkStringify from "remark-stringify";
@@ -14,7 +14,17 @@ import parse from "remark-parse";
 import type { Parent } from "hast";
 import { nanoid } from "nanoid";
 import { PICTURE_PATH } from "./config";
+import tinify from "tinify";
 
+tinify.key = process.env.TINIFY_KEY!;
+
+async function compressPicture(picturePath: string, outputPath: string) {
+  const source = tinify.fromFile(picturePath);
+  const converted = source.convert({ type: "image/webp" });
+  const extension = converted.result().extension();
+  const ext = await extension;
+  return await converted.toFile(outputPath + "." + ext);
+}
 interface ImageNode extends Parent {
   url: string;
   type: "image";
@@ -55,8 +65,9 @@ async function migrateMd(relateNodePath: string, absolutePath: string) {
 async function main() {
   removeTempPictureDir();
   createTempPictureDir();
-  getAllNoteMdFiles().forEach(({ relateNodePath, absolutePath }) => {
-    migrateMd(relateNodePath, absolutePath);
+  const { update, add } = await getDiffFiles();
+  [...add, ...update].forEach(({ relateNotePath, absolutePath }) => {
+    migrateMd(relateNotePath, absolutePath);
   });
 }
 
@@ -80,24 +91,32 @@ const remarkReplaceImgPath: Plugin<Options> = function (options) {
           const { url, alt } = node;
           let tempAbsPath = url;
           const extname = path.extname(url);
+          // if it's a url, download it locally
           if (url.startsWith("http")) {
             tempAbsPath = path.join(tempDir, `img${i}${extname}`);
             await downloadPic(url, tempAbsPath).catch((e) => {
               console.log("download error", url, tempAbsPath);
               tempAbsPath = "";
             });
+            // if it's a relative path, get the absolute path
           } else {
             tempAbsPath = path.join(options.absolutePath, "..", url);
           }
           if (!tempAbsPath) throw new Error("download error");
-          // TODO: compress image
+
           const targetPath = path.join(PICTURE_PATH, options.relatePath, "..");
-          if (!fs.existsSync(targetPath)) {
-            fs.mkdirSync(targetPath, { recursive: true });
+          if (!fs.existsSync(targetPath)) fs.mkdirSync(targetPath, { recursive: true });
+          let targetExtname = extname;
+          const fileName = alt ? alt.replaceAll(" ", "_").slice(0, 100) + "_" + nanoid(2) : nanoid();
+
+          if (extname === ".png" || extname === ".jpg" || extname === ".jpeg") {
+            await compressPicture(tempAbsPath, path.join(targetPath, fileName));
+            targetExtname = ".webp";
+          } else {
+            fs.renameSync(tempAbsPath, path.join(targetPath, fileName + targetExtname));
           }
-          const fileName = (alt ? alt.replaceAll(" ", "_").slice(0, 100) + "_" + nanoid(2) : nanoid()) + extname;
-          fs.renameSync(tempAbsPath, path.join(targetPath, fileName));
-          node.url = getLinkPath(path.join(targetPath, fileName));
+          const finalPath = path.join(targetPath, fileName + targetExtname);
+          node.url = getLinkPath(finalPath);
           fs.rmSync(tempAbsPath, { recursive: true });
         } catch (e) {
           console.error(e);

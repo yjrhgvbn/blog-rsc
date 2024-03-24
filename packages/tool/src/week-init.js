@@ -1,5 +1,9 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const now = new Date();
 const start = new Date(now.getFullYear(), 0, 0);
@@ -13,11 +17,8 @@ const week = Math.ceil(day / 7);
 const currentWeek = `${year}-${week.toString().padStart(2, "0")}`;
 
 const fileName = `${currentWeek}.md`;
-const filePath = path.join(__dirname, "..", "note/week", fileName);
+const filePath = path.join(__dirname, "../../..", "note/week", fileName);
 
-function num2str(num) {
-  return num.toString().padStart(2, "0");
-}
 
 const template = `---
 description: 好记性不如烂笔头，${year}年第${numberToChinese(week)}周周记

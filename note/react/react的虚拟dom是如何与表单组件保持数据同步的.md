@@ -4,7 +4,7 @@ tags:
   - react
 createdAt: 2024-02-01T09:12:57.000Z
 draft: false
-updatedAt: 2024-03-03T10:06:16.410Z
+updatedAt: 2024-03-24T11:01:58.730Z
 ---
 
 之前碰到一个 react 光标的问题，类似的复现如下
@@ -197,7 +197,7 @@ function restoreStateOfTarget(target) {
 ```
 
 ![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231223/image.2j45bzsidlk0.webp)
-这里`props`会赋值图上的`__reactProps$n2pjsknr78s`('**reactProps\$'+随机数，后面称为`**reactProps$`)。而`__reactProps$`的更新是在`updateFiberProps`方法中，上面`commitUpdate`方法中可以看到，也就是说需要进入 commit 才会更新`\_\_reactProps$`。
+这里`props`会赋值图上的`__reactProps$n2pjsknr78s`('reactProps'+随机数，后面称为`__reactProps$`)。而`__reactProps$`的更新是在`updateFiberProps`方法中，上面`commitUpdate`方法中可以看到，也就是说需要进入 commit 才会更新`__reactProps$`。
 
 ## 流程分析
 

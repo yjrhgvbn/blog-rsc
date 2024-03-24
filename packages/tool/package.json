@@ -7,14 +7,26 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "sync:db": "dotenv -e ../../.env tsx ./src/sync_db.ts"
+    "sync:db": "dotenv -e ../../.env tsx ./src/sync_db.ts",
+    "migrate:pic": "dotenv -e ../../.env tsx ./src/migrate_pictures.ts"
   },
   "dependencies": {
     "@repo/db": "workspace:*",
     "@types/node": "^20.11.30",
-    "gray-matter": "^4.0.3"
+    "gray-matter": "^4.0.3",
+    "mdast-util-to-markdown": "^2.1.0",
+    "nanoid": "^5.0.6",
+    "node-fetch": "^3.3.2",
+    "remark": "^15.0.1",
+    "remark-frontmatter": "^5.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "tinify": "^1.7.1",
+    "unified": "^11.0.4",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "@types/hast": "^3.0.3",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.1",
     "hasha": "^6.0.0",

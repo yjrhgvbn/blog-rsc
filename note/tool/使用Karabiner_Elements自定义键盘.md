@@ -3,7 +3,7 @@ draft: false
 description: |
   karabiner-elements 是一款很强大的 mac 开源改建软件，可以通过配置设置自己自定义的映射规则，甚至可以执行控制台命令！
 createdAt: 2023-05-03T09:16:41.000Z
-updatedAt: 2024-03-03T10:06:27.067Z
+updatedAt: 2024-03-24T11:05:24.428Z
 ---
 
 # Karabiner Elements
@@ -22,7 +22,7 @@ updatedAt: 2024-03-03T10:06:27.067Z
 
 ## 第一个映射
 
-首先在 profiles 里增加一个名为 test 的配置，打开配置文件位置，打开 karabiner.json，可以看到`profiles`属性，是一个数组，找到`name`为`test`的对象，这个就是新建的配置了，这个对象有个 complex_modifications，里面的 ruler 属性就是我们自定义的映射，可以先通过[Karabiner Complex Rules Generator](https://genesy.github.io/karabiner-complex-rules-generator/)生成导入几个配置测试下
+首先在 profiles 里增加一个名为 test 的配置，打开配置文件位置，打开 karabiner.json，可以看到`profiles`属性，是一个数组，找到`name`为`test`的对象，这个就是新建的配置了，这个对象有个 `complex_modifications`，里面的 ruler 属性就是我们自定义的映射，可以先通过[Karabiner Complex Rules Generator](https://genesy.github.io/karabiner-complex-rules-generator/)生成导入几个配置测试下
 
 ![](https://s2.loli.net/2023/07/02/zKZgsNj14ekHtcI.png)
 
@@ -43,13 +43,13 @@ updatedAt: 2024-03-03T10:06:27.067Z
 
 上面一个规则的配置，description 是这个规则的描述，manipulators 是具体映射，可以有多个值，主要看第一个对象。
 
-- type 表示这个映射类型，基本是 basic，其他类型可以查看[官网](https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/other-types/)。
+* type 表示这个映射类型，基本是 basic，其他类型可以查看[官网](https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/other-types/)。
 
-- from 表示映射的输入，key_code 可以看的出来，表示的是按下的按钮，modifiers 是对基础键的修饰，mandatory 表示必须与基础键一起出现的键，这里是左 shift
+* from 表示映射的输入，`key_code` 可以看的出来，表示的是按下的按钮，modifiers 是对基础键的修饰，mandatory 表示必须与基础键一起出现的键，这里是左 shift
 
-- to 表示映射的输出，这里表示按下 b 键
+* to 表示映射的输出，这里表示按下 b 键
 
-如果需要知道某个按键对应的 key_code，可以打开提供的另一个 app，[Karabiner EventViewer](https://karabiner-elements.pqrs.org/docs/manual/operation/eventviewer/)查看，安装时会自动安装。
+如果需要知道某个按键对应的 `key_code`，可以打开提供的另一个 app，[Karabiner EventViewer](https://karabiner-elements.pqrs.org/docs/manual/operation/eventviewer/)查看，安装时会自动安装。
 
 ## 使用 karabiner.ts
 
@@ -135,9 +135,9 @@ writeToProfile("test", ruler);
 }
 ```
 
-- set_variable 设置变量，这里设置了一个变量，当分号按下时，设置为 1，松开时设置为 0，这里是为了判断是否按下分号，如果按下分号，再按下其他键，就会触发映射。
-- to_after_key_up 松开按键后触发的操作，这里是清空变量
-- conditions 条件，这里是判断变量是否为 1，如果不为 1，就不会触发映射，这里的变量名要与上面的一致。
+* `set_variable` 设置变量，这里设置了一个变量，当分号按下时，设置为 1，松开时设置为 0，这里是为了判断是否按下分号，如果按下分号，再按下其他键，就会触发映射。
+* `to_after_key_up` 松开按键后触发的操作，这里是清空变量
+* conditions 条件，这里是判断变量是否为 1，如果不为 1，就不会触发映射，这里的变量名要与上面的一致。
 
 ## 设置多个修饰键
 

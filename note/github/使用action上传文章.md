@@ -1,7 +1,7 @@
 ---
 draft: false
 createdAt: 2022-08-01T09:17:57.000Z
-updatedAt: 2024-03-03T10:30:55.831Z
+updatedAt: 2024-03-24T11:01:17.225Z
 ---
 
 写博客文章时，有几个费事的点
@@ -139,7 +139,7 @@ preFailRecord 是记录上次执行失败的文件。这里需要考虑文件重
 
 4. 子模块，这个无疑是最合适的方案，随时修改和读取，也可以免费托管到 github 上，也不会影响主仓库 git 提交记录
 
-git 子模块可以参考这个[文档]((https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
+git 子模块可以参考这个[文档](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
 
 首先在 github 创建一个缓存仓库，这里起名 cache
 

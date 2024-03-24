@@ -15,7 +15,7 @@ $ git config --global alias.amit 'commit --amend --no-edit'
 $ git amit
 ```
 
-当然你也可以到 git 安装目录下的.gitconfig 文件下进行修改。如果你已经定义了一个别名，应该可以在[alias]下看到对应信息。
+当然你也可以到 git 安装目录下的.gitconfig 文件下进行修改。如果你已经定义了一个别名，应该可以在\[alias]下看到对应信息。
 
 git 别名更重要一点是当以感叹号 (!) 作为前缀，它将被视为 shell 命令，你可以依靠这点实现组合命令。例如将暂存 (add) 和提交 (commit) 组合成一条命令：
 

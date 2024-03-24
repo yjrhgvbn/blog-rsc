@@ -10,7 +10,7 @@ updatedAt: 2024-03-03T10:25:30.294Z
 
 例子：[https://www.notion.so/7e99d8276586479c83cb0aee27b8ed90](https://www.notion.so/7e99d8276586479c83cb0aee27b8ed90?pvs=21)
 
-2、ci：[https://developers.weixin.qq.com/miniprogram/dev/devtools/ci.html](https://developers.weixin.qq.com/miniprogram/dev/devtools/ci.html)
+2, ci:<https://developers.weixin.qq.com/miniprogram/dev/devtools/ci.html>
 
 ```bash
 const ci = require("miniprogram-ci");

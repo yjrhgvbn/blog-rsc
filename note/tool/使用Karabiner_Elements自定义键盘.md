@@ -18,13 +18,13 @@ updatedAt: 2024-03-24T11:05:24.428Z
 
 这里不过多解释，跟着文档[安装](https://karabiner-elements.pqrs.org/docs/getting-started/installation/)就好，安装完注意图里的几个点就好。
 
-![](https://s2.loli.net/2023/07/02/qScBK59TgRNjDfW.png)
+![](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/tool/d-NGhjWuHcl8FmbmFspyd.png)
 
 ## 第一个映射
 
 首先在 profiles 里增加一个名为 test 的配置，打开配置文件位置，打开 karabiner.json，可以看到`profiles`属性，是一个数组，找到`name`为`test`的对象，这个就是新建的配置了，这个对象有个 `complex_modifications`，里面的 ruler 属性就是我们自定义的映射，可以先通过[Karabiner Complex Rules Generator](https://genesy.github.io/karabiner-complex-rules-generator/)生成导入几个配置测试下
 
-![](https://s2.loli.net/2023/07/02/zKZgsNj14ekHtcI.png)
+![](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/tool/5dPls3OAWWU4UqlCiUpIa.png)
 
 先来个例子简单了解基本配置，`shift` + `a` 映射成 `b`,
 

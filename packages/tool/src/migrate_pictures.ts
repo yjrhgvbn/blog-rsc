@@ -55,11 +55,9 @@ async function migrateMd(relateNodePath: string, absolutePath: string) {
 async function main() {
   removeTempPictureDir();
   createTempPictureDir();
-  getAllNoteMdFiles()
-    // .slice(0, 2)
-    .forEach(({ relateNodePath, absolutePath }) => {
-      migrateMd(relateNodePath, absolutePath);
-    });
+  getAllNoteMdFiles().forEach(({ relateNodePath, absolutePath }) => {
+    migrateMd(relateNodePath, absolutePath);
+  });
 }
 
 type Options = [
@@ -78,29 +76,32 @@ const remarkReplaceImgPath: Plugin<Options> = function (options) {
     });
     await Promise.allSettled(
       needReplaceNodes.map(async (node, i) => {
-        const { url, alt } = node;
-        let tempAbsPath = url;
-        const extname = path.extname(url);
-        if (url.startsWith("http")) {
-          tempAbsPath = path.join(tempDir, `img${i}${extname}`);
-          await downloadPic(url, tempAbsPath).catch((e) => {
-            console.log("download error", url, tempAbsPath);
-            tempAbsPath = "";
-            return false;
-          });
-        } else {
-          tempAbsPath = path.join(options.absolutePath, "..", url);
+        try {
+          const { url, alt } = node;
+          let tempAbsPath = url;
+          const extname = path.extname(url);
+          if (url.startsWith("http")) {
+            tempAbsPath = path.join(tempDir, `img${i}${extname}`);
+            await downloadPic(url, tempAbsPath).catch((e) => {
+              console.log("download error", url, tempAbsPath);
+              tempAbsPath = "";
+            });
+          } else {
+            tempAbsPath = path.join(options.absolutePath, "..", url);
+          }
+          if (!tempAbsPath) throw new Error("download error");
+          // TODO: compress image
+          const targetPath = path.join(PICTURE_PATH, options.relatePath, "..");
+          if (!fs.existsSync(targetPath)) {
+            fs.mkdirSync(targetPath, { recursive: true });
+          }
+          const fileName = (alt ? alt.replaceAll(" ", "_").slice(0, 100) + "_" + nanoid(2) : nanoid()) + extname;
+          fs.renameSync(tempAbsPath, path.join(targetPath, fileName));
+          node.url = getLinkPath(path.join(targetPath, fileName));
+          fs.rmSync(tempAbsPath, { recursive: true });
+        } catch (e) {
+          console.error(e);
         }
-        if (!tempAbsPath) return;
-        // TODO: compress image
-        const targetPath = path.join(PICTURE_PATH, options.relatePath, "..");
-        if (!fs.existsSync(targetPath)) {
-          fs.mkdirSync(targetPath, { recursive: true });
-        }
-        const fileName = (alt ? alt.replaceAll(" ", "_").slice(0, 100) + "_" + nanoid(2) : nanoid()) + extname;
-        fs.renameSync(tempAbsPath, path.join(targetPath, fileName));
-        node.url = getLinkPath(path.join(targetPath, fileName));
-        fs.rmSync(tempAbsPath, { recursive: true });
       })
     );
   };

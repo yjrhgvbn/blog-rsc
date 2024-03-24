@@ -4,7 +4,7 @@ createdAt: 2023-11-29T09:10:35.000Z
 description: 记录下 node 事件循环 process.nextTick() 和 Promise.then 优先级的问题
 tags:
   - node
-updatedAt: 2024-03-03T10:06:38.852Z
+updatedAt: 2024-03-24T12:17:49.239Z
 ---
 
 最近在学习 nodejs 的事件循环，提到了`process.nextTick()`和`Promise.then`优先级的问题，虽然一般来说前者优先级是高后面的，但执行情况可能会不一样
@@ -51,5 +51,5 @@ this is process.nextTick 1
 所以测试 node 的任务队列，最好是放在 I/O 或者 setTimeout 回调中，在实际情况可以使用`setImmediate`代替`process.nextTick`，`setImmediate`能保证执行位于`Promise.then`回调
 
 相关链接：
-[博客](https://blog.platformatic.dev/the-nodejs-event-loop?source=personalized-newsletter&source-id=2023-11-23)
+[博客](https://blog.platformatic.dev/the-nodejs-event-loop)
 [node 文档](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/#process-nexttick)

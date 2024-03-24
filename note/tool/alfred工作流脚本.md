@@ -19,19 +19,19 @@ updatedAt: 2024-03-03T10:06:33.563Z
 
 1. 创建一个新 workflow，起名为 test，`Bundle Id` 必须设置
 
-![Untitled](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231220/Untitled.1hw8zyozrtmo.webp)
+![Untitled](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/tool/Untitled_1F.webp)
 
 1. 新建 Script Filter，右键→ Inputs → Script Filter，设置**Keyword**为`test`，设置 with space 可选，设置**Language**为`/bin/bash` ，添加脚本`./node_modules/.bin/run-node index.js "$1"`
 
-![Untitled-1](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231220/Untitled-1.3pnd0zfh2qw0.webp)
+![Untitled-1](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/tool/Untitled-1_GD.webp)
 
 保存后打开 alfred 输入 test 就可以看到新加命令了。
 
-![Untitled-2](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231220/Untitled-2.3ge9ajz9sii0.webp)
+![Untitled-2](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/tool/Untitled-2_uq.webp)
 
 1. 右键进入命令行，输入 pnpm init，也可以选择 npm 或者 yarn
 
-![Untitled-3](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231220/Untitled-3.l5fstyikl34.webp)
+![Untitled-3](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/tool/Untitled-3_MK.webp)
 
 1. 打开 package.json，添加"type": "module"。
 2. 安装 alfy 包，`pnpm add alfy`
@@ -67,13 +67,13 @@ updatedAt: 2024-03-03T10:06:33.563Z
 
 上面代码取第一个输入作为筛选，第二输入作为提交备注，ouput 的参数可以参考[alfred 文档](https://www.alfredapp.com/help/workflows/inputs/script-filter/json/)。
 
-![Untitled-4](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231220/Untitled-4.54ihw209yt80.webp)
+![Untitled-4](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/tool/Untitled-4_BJ.webp)
 
 # 打开 iterm2
 
 为保证 iterm2 打开，增加一个 actions 在执行完筛选后打开 iterm2
 
-![Untitled-5](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231220/Untitled-5.66hv73aktj00.webp)
+![Untitled-5](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/tool/Untitled-5_IA.webp)
 
 # 控制 iterm2
 
@@ -83,11 +83,11 @@ iterm2 可以通过 Python 脚本进行控制，具体可以参考[官方介绍]
 
 增加一个**Run Script**的**actions**
 
-![Untitled-6](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231220/Untitled-6.6svavkineoc0.webp)
+![Untitled-6](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/tool/Untitled-6_rm.webp)
 
 参数这样设置就可以
 
-![Untitled-7](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231220/Untitled-7.5bn3e0qgpf80.webp)
+![Untitled-7](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/tool/Untitled-7_Gl.webp)
 
 # 添加脚本
 

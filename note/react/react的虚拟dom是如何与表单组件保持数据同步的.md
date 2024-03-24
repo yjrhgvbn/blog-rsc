@@ -23,7 +23,7 @@ function App() {
 这段代码虽然看上去没什么问题，只是对状态的修改做了一个下延迟，但实际操作做后会发现光标会自动后移，而且没办法使用中文输入法了。
 
 就像下面这样，先正常输入`134`，把光标移到中间，然后再输入`2`，光标就会自动移到最后，正常情况下应该是 2 后面。
-![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231223/image.3097zsbzg020.webp)
+![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/react/image_wd.webp)
 
 这个问题在 react 的[issue](https://github.com/facebook/react/issues/955)里也有人提过，不过没有我想要的答案，所以还是自己看下这个问题是怎么产生的。
 
@@ -170,11 +170,11 @@ function App() {
 
 这里可以在 updateText 方法打断点然后一点点看在哪里进行了 input 的修改。不过我在调试的时候发现 react 在`trackValueOnNode`方法内对`input.value`做了层代理，所以可以直接加上断点。
 
-![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231223/image.6tijfdo0xfw0.webp)
+![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/react/image_pE.webp)
 
 这里增加在 set 方法这里打断点，可以看到调用栈。
 
-![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231223/image.6llaf3e89680.webp)
+![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/react/image_co.webp)
 
 `dispatchDiscreteEvent`这里就是 react 的合成事件，说明 react 在 dom 事件触发时是会更新一次 input 的值。
 
@@ -196,7 +196,7 @@ function restoreStateOfTarget(target) {
 }
 ```
 
-![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231223/image.2j45bzsidlk0.webp)
+![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/react/image_fs.webp)
 这里`props`会赋值图上的`__reactProps$n2pjsknr78s`('reactProps'+随机数，后面称为`__reactProps$`)。而`__reactProps$`的更新是在`updateFiberProps`方法中，上面`commitUpdate`方法中可以看到，也就是说需要进入 commit 才会更新`__reactProps$`。
 
 ## 流程分析
@@ -224,7 +224,7 @@ function restoreStateOfTarget(target) {
 
 至于为什么增加一个 restore 阶段。react 在`finishEventHandler`注释里讲了原因，感兴趣可以了解下。
 
-![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/picx-images-hosting@master/20231223/image.7lf9l6j4v0c0.webp)
+![image](https://jsd.cdn.zzko.cn/gh/yjrhgvbn/blog-rsc@main/public/react/image_6Y.webp)
 
 # 方案
 

@@ -67,16 +67,12 @@
       "title": "week"
     },
     {
-      "path": "[[workspace]]/note/归档",
-      "title": "归档"
+      "path": "[[workspace]]/note/archived",
+      "title": "archived"
     },
     {
-      "path": "[[workspace]]/note/随记",
-      "title": "随记"
-    },
-    {
-      "path": "[[workspace]]/note/脚本",
-      "title": "脚本"
+      "path": "[[workspace]]/note/handwriting",
+      "title": "handwriting"
     },
     {
       "title": "css",
